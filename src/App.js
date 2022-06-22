@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Game from './Game';
+
+const initialState = {
+  isGameOver: false,
+}
 
 function App() {
+  const [isGameOver, setIsGameOver] = useState(initialState.isGameOver)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      { isGameOver &&
+        <>
+          <h1>Perdu !</h1>
+          <button onClick={() => setIsGameOver(false)}>Rejouer</button>
+        </>
+      }
+      {!isGameOver && <Game setIsGameOver={setIsGameOver}/>}
+    </main>
   );
 }
 
