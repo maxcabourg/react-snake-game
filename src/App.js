@@ -12,16 +12,20 @@ function App() {
   return (
     <>
       <main>
-        { isGameOver &&
-          <>
-            <h1>Perdu !</h1>
+        { isGameOver ?
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <h1 style={{display: 'block'}}>Perdu !</h1>
             <button onClick={() => setIsGameOver(false)}>Rejouer</button>
-          </>
+          </div>
+        :
+        <Game setIsGameOver={setIsGameOver}/>
         }
-        {!isGameOver && <Game setIsGameOver={setIsGameOver}/>}
       </main>
       <footer>
-        <span>Made by <strong>Max CABOURG</strong></span>
+        <span>Made by <a href="https://www.linkedin.com/in/max-cabourg-02225111b" style={{color: 'inherit'}}>
+            <strong>Max CABOURG</strong>
+          </a>
+        </span>
       </footer>
     </>
     );

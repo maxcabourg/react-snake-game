@@ -30,9 +30,11 @@ function Game({ setIsGameOver }) {
       const update = useCallback(() => {
         const newGrid = initEmptyGrid(GRID_WIDTH, GRID_HEIGHT);
         newGrid[food.y][food.x] = 'food';
-        snake.forEach(snakeCell => {
+        const snakeHead = getSnakeHead(snake);
+        snake.forEach((snakeCell, index) => {
             newGrid[snakeCell.y][snakeCell.x] = 'snake';
-        })
+        });
+        newGrid[snakeHead.y][snakeHead.x] = 'snake-head';
         setGrid(newGrid)
         setHasChangedDirection(false)
     }, [food.x, food.y, snake])
@@ -71,9 +73,9 @@ function Game({ setIsGameOver }) {
             setIsGameOver(true)
           }
         }  
-        setSnake(prev => copySnake)
+        setSnake(copySnake)
         update()
-      }, [snake, direction, isFoodEaten, setIsGameOver, update])
+      }, [snake, direction, isFoodEaten, setIsGameOver, update, speed])
   
   
     const setup = useCallback(() => {
@@ -147,7 +149,7 @@ function Game({ setIsGameOver }) {
   
     
     return (
-      <div className="game">
+      <div className="game-container">
         <div className="grid" style={{width: `${GRID_WIDTH * CELL_WIDTH}px`, height: `${GRID_HEIGHT * CELL_HEIGHT}px`}}>  
           {grid && grid.map((row, y) => {
             return row.map((_, x) => (
