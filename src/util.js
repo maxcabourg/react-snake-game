@@ -19,18 +19,6 @@ export function getSnakeTail(snake) {
     return snake[0]
 }
 
-export function generateFood(grid) {
-    const coordinates = {
-        x: Math.floor(Math.random() * grid[0].length),
-        y: Math.floor(Math.random() * grid.length),
-    }
-    if (isCellSnake(grid, coordinates.x, coordinates.y)) {
-        generateFood(grid);
-        return;
-    }
-    grid[coordinates.y][coordinates.x] = 'food';
-}
-
 export function isCellSnake(grid, x, y) {
     return grid[y][x] === 'snake';
 }

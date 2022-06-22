@@ -1,8 +1,8 @@
 
 import './App.css';
 import React, { useCallback, useState, useEffect } from 'react';
-import { generateFood, getRandomCoordinates, getSnakeHead, getSnakeTail, initEmptyGrid } from './util';
-import { CELL_HEIGHT, CELL_WIDTH, GRID_HEIGHT, GRID_WIDTH, LEFT, UP, RIGHT, DOWN } from './constants';
+import { getRandomCoordinates, getSnakeHead, initEmptyGrid } from './util';
+import { CELL_HEIGHT, CELL_WIDTH, GRID_HEIGHT, GRID_WIDTH, LEFT, UP, RIGHT, DOWN, MAX_SPEED } from './constants';
 
 const initialState = {
   grid: initEmptyGrid(GRID_WIDTH, GRID_HEIGHT),
@@ -62,7 +62,9 @@ function Game({ setIsGameOver }) {
         if (isFoodEaten()) {
           setScore(prevScore => prevScore + 10);
           setFood(getRandomCoordinates(GRID_WIDTH, GRID_HEIGHT))
-          incrementSpeed()
+          if (speed > MAX_SPEED) {
+              incrementSpeed()
+          }
         } else {
           copySnake.shift();
           if (isCollapsedBorder(copySnake) || isCollapsedBody(copySnake)) {

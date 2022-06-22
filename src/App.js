@@ -10,16 +10,21 @@ function App() {
   const [isGameOver, setIsGameOver] = useState(initialState.isGameOver)
   
   return (
-    <main>
-      { isGameOver &&
-        <>
-          <h1>Perdu !</h1>
-          <button onClick={() => setIsGameOver(false)}>Rejouer</button>
-        </>
-      }
-      {!isGameOver && <Game setIsGameOver={setIsGameOver}/>}
-    </main>
-  );
+    <>
+      <main>
+        { isGameOver &&
+          <>
+            <h1>Perdu !</h1>
+            <button onClick={() => setIsGameOver(false)}>Rejouer</button>
+          </>
+        }
+        {!isGameOver && <Game setIsGameOver={setIsGameOver}/>}
+      </main>
+      <footer>
+        <span>Made by <strong>Max CABOURG</strong></span>
+      </footer>
+    </>
+    );
 }
 
 export default App;
